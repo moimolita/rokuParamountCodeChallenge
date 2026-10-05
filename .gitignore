@@ -1,0 +1,17 @@
+# Roku build artifacts
+out/
+*.zip
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# IDE & Editors
+.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log

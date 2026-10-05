@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    detail_task.xml — Task (Async Network)
+    Fetches full detail (plot + rating) for ONE movie by its IMDb ID, in a
+    background thread. Separate from search_task by operation type: search_task
+    lists movies (?s=), detail_task fetches one movie's detail (?i=). Keeping one
+    responsibility per task scales as more screens navigate to details_screen.
+
+    Inputs  (set by details_screen before control="RUN"):
+        imdb_id — IMDb ID of the movie to fetch
+
+    Outputs (observed by details_screen via observeField):
+        plot    — full plot summary (or a friendly fallback)
+        rating  — IMDb rating (or "N/A")
+        error   — human-readable error message, empty if no error
+
+    Contract: No UI node access. No setFocus. Communicates only via interface fields.
+-->
+<component name="detail_task" extends="Task">
+    <script type="text/brightscript" uri="pkg:/components/tasks/detail_task.brs" />
+    <!-- App constants (Const) — OMDb base URL, API key. -->
+    <script type="text/brightscript" uri="pkg:/source/constants.brs" />
+    <interface>
+        <!-- Input -->
+        <field id="imdb_id" type="string" value="" />
+
+        <!-- Outputs -->
+        <field id="plot"    type="string" value="" />
+        <field id="rating"  type="string" value="" />
+        <field id="error"   type="string" value="" />
+    </interface>
+</component>

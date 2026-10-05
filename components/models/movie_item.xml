@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    movie_item.xml — Data Model
+    Extends ContentNode to hold movie data from OMDb API.
+
+    Fields populated by search endpoint (?s=):
+        imdb_id, title, year, poster_url
+
+    Fields populated by detail endpoint (?i=imdbID&plot=full):
+        plot, rating
+
+    Contract: No .brs file. No logic. Data only.
+-->
+<component name="movie_item" extends="ContentNode">
+    <interface>
+        <field id="imdb_id"    type="string" />
+        <field id="title"      type="string" />
+        <field id="year"       type="string" />
+        <field id="poster_url" type="string" />
+        <field id="plot"       type="string" />
+        <field id="rating"     type="string" />
+    </interface>
+</component>

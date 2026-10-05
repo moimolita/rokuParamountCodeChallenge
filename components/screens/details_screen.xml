@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    details_screen.xml — Screen
+    Full movie details screen. Shows large poster, metadata (title, year, rating,
+    plot) and a Play button. Reached when the user presses OK on a grid card.
+-->
+<component name="Details_screen" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/screens/details_screen.brs" />
+    <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/constants.brs" />
+
+    <interface>
+        <!-- Input -->
+        <field id="movie" type="node" onChange="onMovieChanged" />
+
+        <!-- Output — observed by home_scene to trigger video playback. -->
+        <field id="play_pressed" type="boolean" value="false" alwaysNotify="true" />
+    </interface>
+
+    <children>
+
+        <!-- ── Background ───────────────────────────────────────────── -->
+        <Rectangle
+            id="background"
+            width="1920"
+            height="1080"
+            color="0x0D0D1AFF" />
+
+        <!-- ── Content frame ─────────────────────────────────────────── -->
+        <Rectangle
+            id="content_frame"
+            width="1800"
+            height="960"
+            color="0x1A1A2ECC"
+            translation="[60, 60]" />
+
+        <!-- ── Poster (large — ~5/7 of screen height, right side) ────── -->
+
+        <Poster
+            id="detail_poster"
+            width="514"
+            height="771"
+            translation="[1300, 155]"
+            loadingBitmapUri="pkg:/images/no_poster.png"
+            failedBitmapUri="pkg:/images/no_poster.png" />
+
+        <!-- ── Text column (left) ────────────────────────────────────── -->
+        <!-- ── Title ─────────────────────────────────────────────────── -->
+        <Label
+            id="detail_title"
+            width="1150"
+            height="140"
+            font="font:ExtraLargeBoldSystemFont"
+            color="0xFFFFFFFF"
+            wrap="true"
+            text=""
+            translation="[120, 160]" />
+
+        <!-- ── Year (basic data — set immediately) ───────────────────── -->
+        <Label
+            id="detail_year"
+            width="200"
+            height="40"
+            font="font:MediumSystemFont"
+            color="0xAAAAAAFF"
+            text=""
+            translation="[120, 320]" />
+
+        <!-- ── Rating (filled by the lazy detail fetch — blank until then) ─ -->
+        <Label
+            id="detail_rating"
+            width="400"
+            height="40"
+            font="font:MediumSystemFont"
+            color="0xAAAAAAFF"
+            text=""
+            translation="[330, 320]" />
+
+        <!-- ── Plot ──────────────────────────────────────────────────── -->
+        <Label
+            id="detail_plot"
+            width="1150"
+            height="340"
+            font="font:MediumSystemFont"
+            color="0xCCCCCCFF"
+            wrap="true"
+            text=""
+            translation="[120, 390]" />
+
+        <!-- ── Play Button ───────────────────────────────────────────── -->
+        <!-- Empty icon URIs remove the default focus "dot"/bullet the native 
+        Button shows to the left of the label. -->
+        <Button
+            id="play_button"
+            text="Play"
+            minWidth="160"
+            maxWidth="160"
+            iconUri=""
+            focusedIconUri=""
+            translation="[130, 800]" />
+
+    </children>
+</component>

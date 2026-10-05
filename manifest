@@ -1,0 +1,23 @@
+## Channel Details
+title=Movie Search
+major_version=1
+minor_version=0
+build_version=0
+
+## Channel Icons
+#### Image sizes: mm_icon_focus_fhd: 540x405px | mm_icon_focus_hd: 290x218px | mm_icon_focus_sd: 214x144px
+mm_icon_focus_hd=pkg:/images/channel_logo_hd.png
+mm_icon_focus_fhd=pkg:/images/channel_logo_fhd.png
+
+## Splash Screen
+#### Image sizes: splash_screen_fhd: 1920x1080px | splash_screen_hd: 1280x720px | splash_screen_sd: 720x480px
+splash_screen_hd=pkg:/images/splash_hd.png
+splash_screen_fhd=pkg:/images/splash_fhd.png
+
+## Resolution
+## Designed for 1080p FHD
+ui_resolutions=fhd
+
+## Performance
+## Eliminates black flash when app starts
+splash_rsg_optimization=1

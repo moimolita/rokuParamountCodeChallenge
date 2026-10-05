@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    search_screen.xml — Screen
+    Main search screen. Shows a movie grid on the left and a detail pane on the right.
+-->
+<component name="Search_screen" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/screens/search_screen.brs" />
+    <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/constants.brs" />
+
+    <interface>
+        <!-- Output — observed by home_scene to navigate to details_screen. -->
+        <field id="movie_selected" type="node" alwaysNotify="true" />
+
+        <!-- Output — a hard error message (e.g. network failure) for home_scene to
+             show in the global modal error_dialog. -->
+        <field id="error_message" type="string" value="" alwaysNotify="true" />
+    </interface>
+
+    <children>
+
+        <!-- ── Background ───────────────────────────────────────────── -->
+        <Rectangle
+            id="background"
+            width="1920"
+            height="1080"
+            color="0x0D0D1AFF" />
+
+        <!-- ── Header ───────────────────────────────────────────────── -->
+        <Label
+            id="header"
+            text="Movie Search"
+            color="0xFFFFFFFF"
+            font="font:LargeBoldSystemFont"
+            translation="[65, 60]" />
+
+        <!-- ── Hint / status message ────────────────────────────────── -->
+        <!--
+            Shown when the query is shorter than the OMDb minimum (3 chars).
+            Hidden during a real search.
+        -->
+        <Label
+            id="hint_label"
+            text=""
+            width="600"
+            height="60"
+            font="font:TinySystemFont"
+            color="0xCCCCCC88"
+            horizAlign="left"
+            wrap="true"
+            translation="[65, 830]"
+            visible="false" />
+
+        <!-- ── Movie Grid ────────────────────────────────────────────── -->
+        <!--
+            MarkupGrid uses movie_card as item renderer (itemComponentName).
+            Each cell is an instance of movie_card.
+        -->
+        <MarkupGrid
+            id="movie_grid"
+            translation="[650, 130]"
+            itemSize="[220, 330]"
+            itemSpacing="[20, 20]"
+            numColumns="3"
+            numRows="2"
+            itemComponentName="movie_card"
+            visible="true" />
+
+        <!-- ── Detail Pane ───────────────────────────────────────────── -->
+        <!--
+            Overlay panel on the right side. Background is always visible.
+        -->
+        <Rectangle
+            id="detail_pane"
+            width="480"
+            height="755"
+            color="0x1A1A2ECC"
+            translation="[1380, 130]"
+            visible="true" />
+
+        <!-- Medium poster (posterUrl 300). Declared FIRST so it renders behind the
+             title band and title (SceneGraph: later children draw on top). -->
+        <Poster
+            id="detail_poster"
+            width="440"
+            height="560"
+            translation="[1400, 150]"
+            loadingBitmapUri="pkg:/images/no_poster.png"
+            failedBitmapUri="pkg:/images/no_poster.png"
+            visible="false" />
+
+        <!-- Semi-transparent band over the poster's lower third — guarantees the
+             title is legible regardless of the image behind it. -->
+        <Rectangle
+            id="detail_title_bg"
+            width="440"
+            height="120"
+            color="0x000000AA"
+            translation="[1400, 590]"
+            visible="false" />
+
+        <!-- Title — declared LAST of the overlapping trio, so it draws on top of
+             both the poster and the band. -->
+        <Label
+            id="detail_title"
+            width="410"
+            height="110"
+            font="font:MediumBoldSystemFont"
+            color="0xFFFFFFFF"
+            wrap="true"
+            text=""
+            translation="[1415, 605]"
+            visible="false" />
+
+        <!-- Year + plot sit BELOW the poster. -->
+        <Label
+            id="detail_year"
+            width="440"
+            height="30"
+            font="font:SmallSystemFont"
+            color="0xAAAAAAFF"
+            text=""
+            translation="[1400, 725]"
+            visible="false" />
+
+        <Label
+            id="detail_plot"
+            width="440"
+            height="150"
+            font="font:SmallSystemFont"
+            color="0xCCCCCCFF"
+            wrap="true"
+            text=""
+            translation="[1400, 765]"
+            visible="false" />
+
+        <!-- ── Search Keyboard ──────────────────────────────────────── -->
+        <!--
+            MiniKeyboard — narrow, vertical character grid (Netflix / TV-search style).
+        -->
+        <MiniKeyboard
+            id="search_keyboard"
+            translation="[50, 130]" />
+
+        <!-- ── Debounce Timer ───────────────────────────────────────── -->
+        <!--
+            Debounces incremental search. Each keystroke restarts this timer;
+            the actual OMDb search runs only when it fires (1.5s after the last
+            keystroke). Prevents one HTTP request per letter.
+        -->
+        <Timer
+            id="debounce_timer"
+            duration="1.5"
+            repeat="false" />
+
+    </children>
+</component>

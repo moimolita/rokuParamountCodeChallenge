@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    movie_card.xml — Custom Component
+-->
+<component name="movie_card" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/components/movie_card.brs" />
+    <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/source/constants.brs" />
+
+    <interface>
+        <!--
+            itemContent: MarkupGrid automatically sets this field on each item
+            renderer with the corresponding ContentNode child.
+        -->
+        <field id="itemContent" type="node" />
+    </interface>
+
+    <children>
+        <!-- Poster background ─────────────────────────────────────────── -->
+        <Rectangle
+            id="poster_bg"
+            width="220"
+            height="260"
+            color="0x1A1A2ECC"
+            translation="[0, 0]" />
+
+        <!-- Poster image — uri updated via data binding in onMovieChanged -->
+        <Poster
+            id="poster"
+            width="220"
+            height="260"
+            scaleRotateCenter="[100, 130]"
+            loadingBitmapUri="pkg:/images/no_poster.png"
+            failedBitmapUri="pkg:/images/no_poster.png"
+            translation="[0, 0]" />
+
+        <!-- Movie title — text updated via data binding in onMovieChanged -->
+        <Label
+            id="title"
+            width="200"
+            height="28"
+            font="font:SmallestBoldSystemFont"
+            color="0xFFFFFFFF"
+            ellipsizeOnBoundary="true"
+            text=""
+            translation="[0, 268]" />
+
+        <!-- Release year — text updated via data binding in onMovieChanged -->
+        <Label
+            id="year"
+            width="200"
+            height="24"
+            font="font:SmallestSystemFont"
+            color="0xAAAAAAFF"
+            text=""
+            translation="[0, 300]" />
+    </children>
+</component>

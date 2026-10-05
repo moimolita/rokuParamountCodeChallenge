@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    search_task.xml — Task (Async Network)
+    Fetches movie search results from OMDb API in a background thread.
+
+    Inputs  (set by UI thread before control="RUN"):
+        query        — search term entered by the user
+        page         — page number for pagination (default: 1)
+
+    Outputs (observed by UI thread via observeField):
+        results      — ContentNode tree of movie_item nodes (mutually exclusive with error)
+        error        — human-readable error message (mutually exclusive with results)
+        totalResults — total result count reported by OMDb (used for pagination)
+
+    Contract: No UI node access. No setFocus. Communicates only via interface fields.
+-->
+<component name="search_task" extends="Task">
+    <script type="text/brightscript" uri="pkg:/components/tasks/search_task.brs" />
+    <!-- App constants (Const) — OMDb base URL, API key, HTTP timeout. -->
+    <script type="text/brightscript" uri="pkg:/source/constants.brs" />
+    <interface>
+        <!-- Inputs -->
+        <field id="query"        type="string"  value=""  />
+        <field id="page"         type="integer" value="1" />
+
+        <!-- Outputs -->
+        <field id="results"      type="node"    />
+        <field id="error"        type="string"  value="" />
+        <field id="totalResults" type="integer" value="0" />
+    </interface>
+</component>

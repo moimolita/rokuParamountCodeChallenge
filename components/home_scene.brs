@@ -3,12 +3,14 @@
 '**
 '* @description Entry point. Creates the search_screen on demand, configures the video player,
 '*              registers observers, and sets initial focus.
-'*              Screens are created lazily to optimize memory usage on Roku's limited platform.
 '* @sideeffect Stores node references in m. Registers field observers. Sets focus to search_screen.
 '*
 function init()
     resolveNodes()
+    initDeviceInfo()       ' Initialize memory monitoring
+    printMemoryMetrics("INIT")
     createSearchScreen()
+    printMemoryMetrics("AFTER_CREATE_SEARCH")
     initVideoPlayer()
     m.search_screen.setFocus(true)
 end function
@@ -21,6 +23,49 @@ end function
 sub resolveNodes()
     m.video_player = m.top.findNode("video_player")
     m.error_dialog = m.top.findNode("error_dialog")
+end sub
+
+' ─── Memory Monitorig ────────────────────────────────────────────────────────
+
+'**
+'* @description Initializes the app memory monitor for memory tracking and alerts.
+'*              Uses roAppMemoryMonitor to track app-specific memory usage (not device-wide).
+'* @sideeffect Stores m.memory_monitor in m. Enables memory warning events.
+'*
+sub initDeviceInfo()
+    m.memory_monitor = createObject("roAppMemoryMonitor")
+    if m.memory_monitor <> invalid
+        m.memory_monitor.EnableMemoryWarningEvent(true)
+    end if
+end sub
+
+'**
+'* @description Prints memory metrics to console for debugging and validation.
+'*              Uses roAppMemoryMonitor to measure this app's specific memory usage.
+'*              Helps verify that lazy loading and screen destruction properly free memory.
+'* @param {String} label Context label (e.g. "INIT", "AFTER_CREATE_DETAILS")
+'* @sideeffect Prints to console. Optionally alerts if memory usage is high.
+'*
+sub printMemoryMetrics(label as string)
+    if m.memory_monitor = invalid then return
+    
+    percentUsed = m.memory_monitor.GetMemoryLimitPercent()
+    
+    ' Determine status based on percentage
+    statusEmoji = "❓"
+    statusName = "UNKNOWN"
+    if percentUsed < 60
+        statusEmoji = "✓"
+        statusName = "HEALTHY"
+    else if percentUsed < 80
+        statusEmoji = "⚠"
+        statusName = "WARNING"
+    else if percentUsed >= 80
+        statusEmoji = "⚠⚠⚠"
+        statusName = "APP MEMORY CRITICAL"  ' Alert if memory usage is critical
+    end if
+    
+    print "[MEMORY] " + statusEmoji + " " + label + " — App Memory: " + percentUsed.toStr() + "% (" + statusName + ")"
 end sub
 
 ' ─── Screen Creation (Lazy Loading) ──────────────────────────────────────────
@@ -45,7 +90,6 @@ end sub
 '**
 '* @description Creates details_screen dynamically as a child of home_scene.
 '*              Called on demand in onMovieSelected() when user selects a movie.
-'*              Destroyed in destroyDetailsScreen() when user navigates back or finishes playback.
 '* @sideeffect Creates m.details_screen, attaches it to m.top, registers observer.
 '*
 sub createDetailsScreen()
@@ -85,6 +129,7 @@ sub onMovieSelected(obj)
     ' Create details_screen on demand (first time user selects a movie)
     if m.details_screen = invalid
         createDetailsScreen()
+        printMemoryMetrics("AFTER_CREATE_DETAILS")
     end if
     
     m.details_screen.movie = movie   ' assign data BEFORE making visible
@@ -155,6 +200,7 @@ sub closeVideo()
     m.video_player.control   = "stop"
     m.video_player.visible   = false
     destroyDetailsScreen()
+    printMemoryMetrics("AFTER_DESTROY_DETAILS")
     m.search_screen.visible  = true
     m.search_screen.setFocus(true)
 end sub
@@ -177,7 +223,6 @@ end sub
 
 '**
 '* @description Handles the global Back key (single-exit-point pattern).
-'*              Properly cleans up screens when navigating back.
 '* @param {String} key Name of the key pressed (e.g. "back", "OK").
 '* @param {Boolean} press True on key down, false on key up.
 '* @returns {Boolean} True if consumed (app stays alive); false closes the app on root.
@@ -191,6 +236,7 @@ function onKeyEvent(key as string, press as boolean) as boolean
             handle = true
         else if m.details_screen <> invalid and m.details_screen.visible
             destroyDetailsScreen()
+            printMemoryMetrics("AFTER_DESTROY_DETAILS_BACK")
             m.search_screen.visible  = true
             m.search_screen.setFocus(true)
             handle = true

@@ -54,13 +54,13 @@ sub printMemoryMetrics(label as string)
     ' Determine status based on percentage
     statusEmoji = "❓"
     statusName = "UNKNOWN"
-    if percentUsed < 60
+    if percentUsed < Const().MEMORY_WARNING_PCT
         statusEmoji = "✓"
         statusName = "HEALTHY"
-    else if percentUsed < 80
+    else if percentUsed < Const().MEMORY_CRITICAL_PCT
         statusEmoji = "⚠"
         statusName = "WARNING"
-    else if percentUsed >= 80
+    else if percentUsed >= Const().MEMORY_CRITICAL_PCT
         statusEmoji = "⚠⚠⚠"
         statusName = "APP MEMORY CRITICAL"  ' Alert if memory usage is critical
     end if
@@ -159,9 +159,9 @@ sub onPlayPressed(obj)
     m.video_player.setFocus(true)
 
     content = createObject("roSGNode", "ContentNode")
-    content.url          = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
-    content.streamformat = "hls"
-    content.title        = "Big Buck Bunny"
+    content.url          = Const().SAMPLE_STREAM_URL
+    content.streamformat = Const().SAMPLE_STREAM_FORMAT
+    content.title        = Const().SAMPLE_STREAM_TITLE
 
     m.video_player.content = content
     m.video_player.control = "play"
@@ -175,7 +175,7 @@ end sub
 '*
 sub initVideoPlayer()
     m.video_player.enableCookies()
-    m.video_player.setCertificatesFile("common:/certs/ca-bundle.crt")
+    m.video_player.setCertificatesFile(Const().SSL_CERTIFICATES_FILE)
     m.video_player.initClientCertificates()
     m.video_player.notificationInterval = 1
     m.video_player.observeFieldScoped("state", "onPlayerStateChanged")

@@ -4,6 +4,7 @@
 -->
 <component name="home_scene" extends="Scene">
     <script type="text/brightscript" uri="pkg:/components/home_scene.brs" />
+    <script type="text/brightscript" uri="pkg:/source/constants.brs" />
     <children>
         <!-- Native Roku video player — shown when user presses Play in details_screen -->
         <Video

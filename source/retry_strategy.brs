@@ -19,7 +19,7 @@ function httpGetWithRetry(url as string, maxRetries = 3 as integer, baseDelaySec
         transfer = createObject("roUrlTransfer")
         transfer.setUrl(url)
         transfer.enableCookies()
-        transfer.setCertificatesFile("common:/certs/ca-bundle.crt")
+        transfer.setCertificatesFile(Const().SSL_CERTIFICATES_FILE)
         transfer.initClientCertificates()
         
         ' Attempt HTTP GET

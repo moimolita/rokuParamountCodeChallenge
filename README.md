@@ -102,6 +102,30 @@ images/                        Icons, splash, poster placeholder
 - **One custom component** — `movie_card` demonstrates a field observer, data
   binding, and lifecycle handling.
 
+## Architecture: Lazy Loading & Memory Management
+
+The app uses **lazy loading** to optimize memory usage on Roku's resource-constrained
+platform:
+
+- **Persistent nodes** — only `video_player` and `error_dialog` are created in the
+  XML and exist for the app's lifetime.
+- **On-demand screens** — `search_screen` is created in `init()`; `details_screen`
+  is created the first time a user selects a movie (via `onMovieSelected()`). This
+  defers memory allocation until needed.
+- **Cleanup** — `details_screen` is destroyed (and removed from the tree) when the
+  user presses Back or video playback ends (via `destroyDetailsScreen()`), freeing
+  memory immediately.
+- **Why this matters** — A real app with dozens of screens cannot afford to keep all
+  UI alive. Lazy loading demonstrates resource-aware design: screens are instantiated
+  only when the user navigates to them, and destroyed when they leave, keeping memory
+  footprint minimal.
+
+**Implementation:**
+- `createSearchScreen()` — instantiates search_screen and registers observers.
+- `createDetailsScreen()` — instantiates details_screen and registers observers (called on demand).
+- `destroyDetailsScreen()` — removes details_screen from the tree and sets the reference to `invalid`.
+- All transitions check if a screen needs creation (`if m.details_screen = invalid`) before use.
+
 ## Notes
 
 - Sample video is a fixed HLS stream — OMDb provides metadata, not video sources.

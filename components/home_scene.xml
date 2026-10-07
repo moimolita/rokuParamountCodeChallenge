@@ -2,21 +2,9 @@
 <!--
     home_scene.xml — Scene (Root Orchestrator)
 -->
-<component name="home_scene" extends="Scene" initialFocus="search_screen">
+<component name="home_scene" extends="Scene">
     <script type="text/brightscript" uri="pkg:/components/home_scene.brs" />
     <children>
-        <!-- Initial screen — visible on startup -->
-        <Search_screen
-            id="search_screen"
-            visible="true"
-            translation="[0,0]" />
-
-        <!-- Movie details — shown when user selects a movie in search_screen -->
-        <Details_screen
-            id="details_screen"
-            visible="false"
-            translation="[0,0]" />
-
         <!-- Native Roku video player — shown when user presses Play in details_screen -->
         <Video
             id="video_player"

@@ -13,25 +13,19 @@ end sub
 '**
 '* @description Runs on the task thread: fetches a page of OMDb search results,
 '*              parses them, and publishes totalResults + a movie_item tree (or an error).
+'*              Uses exponential backoff retry strategy to handle transient network failures.
 '* @sideeffect Writes m.top.totalResults, m.top.results, and m.top.error.
 '*
 sub executeSearch()
-    request = createObject("roUrlTransfer")
-
-    ' SSL — required for HTTPS, or the request fails silently.
-    request.setCertificatesFile("common:/certs/ca-bundle.crt")
-    request.initClientCertificates()
-
     ' Build the OMDb search URL. escape() URL-encodes the query (spaces, etc.).
-    query = request.escape(m.top.query)
+    transfer = createObject("roUrlTransfer")
+    query = transfer.escape(m.top.query)
     url = Const().OMDB_BASE_URL + "?apikey=" + Const().OMDB_API_KEY + "&s=" + query + "&page=" + m.top.page.toStr()
-    request.setUrl(url)
 
-    ' GET with an explicit timeout. A blocking getToString() has no timeout and can
-    ' hang forever with no network; this always returns within the timeout.
-    rawResponse = httpGetWithTimeout(request, Const().HTTP_TIMEOUT_MS)
+    ' Fetch with exponential backoff retry (3 attempts: 1s, 2s, 4s delay)
+    rawResponse = httpGetWithRetry(url, 3, 1.0)
 
-    ' NETWORK error — empty response means the request failed or timed out.
+    ' NETWORK error — empty response means all retries failed.
     if rawResponse = "" or rawResponse = invalid
         m.top.totalResults = 0
         m.top.error = "network"
@@ -87,25 +81,4 @@ function buildMovieNodes(parsed as object) as object
     end for
 
     return content
-end function
-
-'**
-'* @description HTTP GET with an explicit timeout. Uses asyncGetToString() + wait()
-'*              so the call always returns within timeoutMs (cancels on timeout).
-'* @param {Object} request A configured roUrlTransfer (url + SSL already set).
-'* @param {Integer} timeoutMs Max milliseconds to wait for the response.
-'* @returns {String} The response body, or "" on failure/timeout.
-'*
-function httpGetWithTimeout(request as object, timeoutMs as integer) as string
-    port = createObject("roMessagePort")
-    request.setMessagePort(port)
-
-    if request.asyncGetToString() = false then return ""
-
-    msg = wait(timeoutMs, port)
-    if type(msg) = "roUrlEvent" then return msg.getString()
-
-    ' Timed out — cancel and report empty.
-    request.asyncCancel()
-    return ""
 end function

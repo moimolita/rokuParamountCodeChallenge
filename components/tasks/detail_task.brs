@@ -13,21 +13,18 @@ end sub
 '**
 '* @description Runs on the task thread: fetches full detail (plot + rating) for one
 '*              movie via the OMDb detail endpoint (?i={imdbID}&plot=full).
+'*              Uses exponential backoff retry strategy to handle transient failures.
 '* @sideeffect Writes m.top.plot and m.top.rating.
 '*
 sub fetchDetail()
-    request = createObject("roUrlTransfer")
-
-    ' SSL — required for HTTPS, or the request fails silently.
-    request.setCertificatesFile("common:/certs/ca-bundle.crt")
-    request.initClientCertificates()
-
     ' Detail endpoint: i={imdbID}&plot=full returns Plot + imdbRating.
-    id = request.escape(m.top.imdb_id)
+    transfer = createObject("roUrlTransfer")
+    id = transfer.escape(m.top.imdb_id)
     url = Const().OMDB_BASE_URL + "?apikey=" + Const().OMDB_API_KEY + "&i=" + id + "&plot=full"
-    request.setUrl(url)
 
-    rawResponse = request.getToString()
+    ' Fetch with exponential backoff retry (3 attempts: 1s, 2s, 4s delay)
+    rawResponse = httpGetWithRetry(url, 3, 1.0)
+    
     parsed = parseJSON(rawResponse)
 
     ' Guard — bad JSON or failed API response. Leave outputs at their defaults.

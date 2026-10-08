@@ -76,15 +76,15 @@ end sub
 '* @sideeffect Creates m.search_screen, attaches it to m.top, registers observers.
 '*
 sub createSearchScreen()
-    m.search_screen = createObject("roSGNode", "Search_screen")
+    m.search_screen = createObject("roSGNode", "SearchScreen")
     m.search_screen.id = "search_screen"
     m.search_screen.visible = true
     m.search_screen.translation = [0, 0]
     m.top.appendChild(m.search_screen)
     
     ' Register observers for navigation and error events
-    m.search_screen.observeField("movie_selected", "onMovieSelected")
-    m.search_screen.observeField("error_message", "onSearchError")
+    m.search_screen.observeField("movieSelected", "onMovieSelected")
+    m.search_screen.observeField("errorMessage", "onSearchError")
 end sub
 
 '**

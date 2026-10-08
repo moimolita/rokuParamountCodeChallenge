@@ -19,7 +19,7 @@ end sub
 sub fetchDetail()
     ' Detail endpoint: i={imdbID}&plot=full returns Plot + imdbRating.
     transfer = createObject("roUrlTransfer")
-    id = transfer.escape(m.top.imdb_id)
+    id = transfer.escape(m.top.imdbId)
     url = Const().OMDB_BASE_URL + "?apikey=" + Const().OMDB_API_KEY + "&i=" + id + "&plot=full"
 
     ' Fetch with exponential backoff retry (3 attempts: 1s, 2s, 4s delay)

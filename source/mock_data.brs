@@ -9,16 +9,16 @@
 function getMockMovies(query = "" as string) as object
     content = createObject("roSGNode", "ContentNode")
 
-    ' poster_url uses pkg:/ to reference images bundled with the channel.
+    ' posterUrl uses pkg:/ to reference images bundled with the channel.
     movies = [
-        {title: "The Dark Knight",   year: "2008", imdb_id: "tt0468569",  poster: "pkg:/images/mock/thumbnail-drama1.jpg",  plot: "Batman fights the Joker in Gotham City."}
-        {title: "Inception",         year: "2010", imdb_id: "tt1375666",  poster: "pkg:/images/mock/thumbnail-drama2.jpg",  plot: "A thief who steals corporate secrets through dream-sharing technology."}
-        {title: "Interstellar",      year: "2014", imdb_id: "tt0816692",  poster: "pkg:/images/mock/thumbnail-drama3.jpg",  plot: "A team of explorers travel through a wormhole in space."}
-        {title: "The Matrix",        year: "1999", imdb_id: "tt0133093",  poster: "pkg:/images/mock/thumbnail-drama4.jpg",  plot: "A computer hacker learns about the true nature of reality."}
-        {title: "Avengers: Endgame", year: "2019", imdb_id: "tt4154796",  poster: "pkg:/images/mock/thumbnail-drama5.jpg",  plot: "The Avengers assemble to undo Thanos' actions."}
-        {title: "Parasite",          year: "2019", imdb_id: "tt6751668",  poster: "pkg:/images/mock/thumbnail-comedy1.jpg", plot: "A poor family schemes to become employed by a wealthy family."}
-        {title: "Dune",              year: "2021", imdb_id: "tt1160419",  poster: "pkg:/images/mock/thumbnail-comedy2.jpg", plot: "A noble family becomes embroiled in a war for a desert planet."}
-        {title: "Oppenheimer",       year: "2023", imdb_id: "tt15398776", poster: "pkg:/images/mock/thumbnail-comedy3.jpg", plot: "The story of J. Robert Oppenheimer and the atomic bomb."}
+        {title: "The Dark Knight",   year: "2008", imdbId: "tt0468569",  poster: "pkg:/images/mock/thumbnail-drama1.jpg",  plot: "Batman fights the Joker in Gotham City."}
+        {title: "Inception",         year: "2010", imdbId: "tt1375666",  poster: "pkg:/images/mock/thumbnail-drama2.jpg",  plot: "A thief who steals corporate secrets through dream-sharing technology."}
+        {title: "Interstellar",      year: "2014", imdbId: "tt0816692",  poster: "pkg:/images/mock/thumbnail-drama3.jpg",  plot: "A team of explorers travel through a wormhole in space."}
+        {title: "The Matrix",        year: "1999", imdbId: "tt0133093",  poster: "pkg:/images/mock/thumbnail-drama4.jpg",  plot: "A computer hacker learns about the true nature of reality."}
+        {title: "Avengers: Endgame", year: "2019", imdbId: "tt4154796",  poster: "pkg:/images/mock/thumbnail-drama5.jpg",  plot: "The Avengers assemble to undo Thanos' actions."}
+        {title: "Parasite",          year: "2019", imdbId: "tt6751668",  poster: "pkg:/images/mock/thumbnail-comedy1.jpg", plot: "A poor family schemes to become employed by a wealthy family."}
+        {title: "Dune",              year: "2021", imdbId: "tt1160419",  poster: "pkg:/images/mock/thumbnail-comedy2.jpg", plot: "A noble family becomes embroiled in a war for a desert planet."}
+        {title: "Oppenheimer",       year: "2023", imdbId: "tt15398776", poster: "pkg:/images/mock/thumbnail-comedy3.jpg", plot: "The story of J. Robert Oppenheimer and the atomic bomb."}
     ]
 
     ' Lowercase the query once for case-insensitive title matching
@@ -30,8 +30,8 @@ function getMockMovies(query = "" as string) as object
             item = createObject("roSGNode", "movie_item")
             item.title      = movieData.title
             item.year       = movieData.year
-            item.imdb_id    = movieData.imdb_id
-            item.poster_url = movieData.poster
+            item.imdbId     = movieData.imdbId
+            item.posterUrl  = movieData.poster
             item.plot       = movieData.plot
             item.rating     = "N/A"
             content.appendChild(item)

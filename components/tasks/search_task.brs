@@ -73,8 +73,8 @@ function buildMovieNodes(parsed as object) as object
         item = createObject("roSGNode", "movie_item")
         item.title      = result["Title"]
         item.year       = result["Year"]
-        item.imdb_id    = result["imdbID"]
-        item.poster_url = result["Poster"]
+        item.imdbId     = result["imdbID"]
+        item.posterUrl  = result["Poster"]
         item.plot       = ""      ' not in the search endpoint — filled by detail fetch
         item.rating     = "N/A"   ' not in the search endpoint — filled by detail fetch
         content.appendChild(item)

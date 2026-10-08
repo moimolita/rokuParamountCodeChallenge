@@ -7,7 +7,7 @@
     responsibility per task scales as more screens navigate to details_screen.
 
     Inputs  (set by details_screen before control="RUN"):
-        imdb_id — IMDb ID of the movie to fetch
+        imdbId — IMDb ID of the movie to fetch
 
     Outputs (observed by details_screen via observeField):
         plot    — full plot summary (or a friendly fallback)
@@ -24,7 +24,7 @@
     <script type="text/brightscript" uri="pkg:/source/retry_strategy.brs" />
     <interface>
         <!-- Input -->
-        <field id="imdb_id" type="string" value="" />
+        <field id="imdbId"  type="string" value="" />
 
         <!-- Outputs -->
         <field id="plot"    type="string" value="" />

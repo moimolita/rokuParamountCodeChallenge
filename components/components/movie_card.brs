@@ -31,7 +31,7 @@ sub onMovieChanged(obj)
 
     ' Grid cards are small — request a reduced-width poster to save bandwidth and
     ' texture memory across the many cards in a paginated grid.
-    m.poster.uri = buildPosterUrl(movie.poster_url, Const().POSTER_GRID)
+    m.poster.uri = buildPosterUrl(movie.posterUrl, Const().POSTER_GRID)
     m.title.text = movie.title
     m.year.text  = movie.year
 end sub

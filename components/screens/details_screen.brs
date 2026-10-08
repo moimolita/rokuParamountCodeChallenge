@@ -61,7 +61,7 @@ sub onMovieChanged(obj)
     if m.detail_title = invalid then return
 
     ' Basic data from the search result — shown immediately. Large poster.
-    m.detail_poster.uri = buildPosterUrl(movie.poster_url, Const().POSTER_DETAIL)
+    m.detail_poster.uri = buildPosterUrl(movie.posterUrl, Const().POSTER_DETAIL)
     m.detail_title.text = movie.title
     m.detail_year.text  = movie.year
 
@@ -70,7 +70,7 @@ sub onMovieChanged(obj)
     m.detail_plot.text   = ""
 
     ' Fire the lazy detail fetch for this movie (set input then run).
-    m.detail_task.imdb_id = movie.imdb_id
+    m.detail_task.imdbId = movie.imdbId
     m.detail_task.control = "RUN"
 end sub
 

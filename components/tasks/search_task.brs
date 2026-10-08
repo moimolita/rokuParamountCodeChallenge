@@ -70,7 +70,7 @@ function buildMovieNodes(parsed as object) as object
     if parsed["Response"] <> "True" then return content
 
     for each result in parsed["Search"]
-        item = createObject("roSGNode", "movie_item")
+        item = createObject("roSGNode", "MovieItem")
         item.title      = result["Title"]
         item.year       = result["Year"]
         item.imdbId     = result["imdbID"]

@@ -27,7 +27,7 @@ function getMockMovies(query = "" as string) as object
     for each movieData in movies
         ' Filter by title when a query is provided — empty query returns all
         if query = "" or instr(1, lCase(movieData.title), queryLower) > 0
-            item = createObject("roSGNode", "movie_item")
+            item = createObject("roSGNode", "MovieItem")
             item.title      = movieData.title
             item.year       = movieData.year
             item.imdbId     = movieData.imdbId

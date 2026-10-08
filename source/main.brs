@@ -8,7 +8,7 @@ sub main()
 
     screen = createObject("roSGScreen")
     screen.setMessagePort(m.port)
-    scene = screen.createScene("home_scene")
+    scene = screen.createScene("HomeScene")
     screen.show()
 
     ' Main message loop — keeps the app alive and listens for system events

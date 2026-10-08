@@ -11,7 +11,7 @@
 
     Contract: No .brs file. No logic. Data only.
 -->
-<component name="movie_item" extends="ContentNode">
+<component name="MovieItem" extends="ContentNode">
     <interface>
         <field id="imdbId"    type="string" />
         <field id="title"     type="string" />

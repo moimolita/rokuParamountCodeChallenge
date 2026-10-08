@@ -14,7 +14,7 @@
         <!-- Input -->
         <field id="movie" type="node" onChange="onMovieChanged" />
 
-        <!-- Output — observed by home_scene to trigger video playback. -->
+        <!-- Output — observed by HomeScene to trigger video playback. -->
         <field id="playPressed" type="boolean" value="false" alwaysNotify="true" />
     </interface>
 

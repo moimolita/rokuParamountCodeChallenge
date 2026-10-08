@@ -8,7 +8,7 @@
         page         — page number for pagination (default: 1)
 
     Outputs (observed by UI thread via observeField):
-        results      — ContentNode tree of movie_item nodes (mutually exclusive with error)
+        results      — ContentNode tree of MovieItem nodes (mutually exclusive with error)
         error        — human-readable error message (mutually exclusive with results)
         totalResults — total result count reported by OMDb (used for pagination)
 

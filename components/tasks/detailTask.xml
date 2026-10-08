@@ -2,14 +2,14 @@
 <!--
     detailTask.xml — Task (Async Network)
     Fetches full detail (plot + rating) for ONE movie by its IMDb ID, in a
-    background thread. Separate from search_task by operation type: search_task
-    lists movies (?s=), detail_task fetches one movie's detail (?i=). Keeping one
-    responsibility per task scales as more screens navigate to details_screen.
+    background thread. Separate from SearchTask by operation type: SearchTask
+    lists movies (?s=), DetailTask fetches one movie's detail (?i=). Keeping one
+    responsibility per task scales as more screens navigate to DetailsScreen.
 
-    Inputs  (set by details_screen before control="RUN"):
+    Inputs  (set by DetailsScreen before control="RUN"):
         imdbId — IMDb ID of the movie to fetch
 
-    Outputs (observed by details_screen via observeField):
+    Outputs (observed by DetailsScreen via observeField):
         plot    — full plot summary (or a friendly fallback)
         rating  — IMDb rating (or "N/A")
         error   — human-readable error message, empty if no error

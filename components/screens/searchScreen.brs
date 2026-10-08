@@ -128,7 +128,7 @@ sub onResultsReady(obj)
         m.totalResults = 0
         return
     else if taskError = "network"
-        ' Bubble the hard error up — home_scene shows the modal.
+        ' Bubble the hard error up — HomeScene shows the modal.
         m.top.errorMessage = "Connection error. Please check your network and try again."
         return
     end if
@@ -235,8 +235,8 @@ end sub
 ' ─── Selection Handler ────────────────────────────────────────────────────────
 
 '**
-'* @description On OK, writes the selected movie_item to movieSelected (observed by
-'*              home_scene to navigate to DetailsScreen).
+'* @description On OK, writes the selected MovieItem to movieSelected (observed by
+'*              HomeScene to navigate to DetailsScreen).
 '* @param {roAssociativeArray} obj Field change event carrying the selected item index.
 '* @sideeffect Writes to m.top.movieSelected.
 '*

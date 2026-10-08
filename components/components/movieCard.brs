@@ -18,8 +18,8 @@ end function
 ' ─── Field Observer ───────────────────────────────────────────────────────────
 
 '**
-'* @description Fired when MarkupGrid assigns a movie_item. Binds poster/title/year.
-'* @param {roAssociativeArray} obj Field change event; obj.getData() is the movie_item.
+'* @description Fired when MarkupGrid assigns a MovieItem. Binds poster/title/year.
+'* @param {roAssociativeArray} obj Field change event; obj.getData() is the MovieItem.
 '* @sideeffect Updates m.poster.uri, m.title.text, m.year.text.
 '*
 sub onMovieChanged(obj)

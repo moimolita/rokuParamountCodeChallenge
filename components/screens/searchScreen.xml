@@ -10,7 +10,7 @@
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />
 
     <interface>
-        <!-- Output — observed by home_scene to navigate to details_screen. -->
+        <!-- Output — observed by HomeScene to navigate to DetailsScreen. -->
         <field id="movieSelected" type="node" alwaysNotify="true" />
 
         <!-- Output — a hard error message (e.g. network failure). -->

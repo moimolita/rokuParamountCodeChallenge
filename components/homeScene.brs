@@ -71,7 +71,7 @@ end sub
 ' ─── Screen Creation (Lazy Loading) ──────────────────────────────────────────
 
 '**
-'* @description Creates searchScreen dynamically as a child of home_scene.
+'* @description Creates searchScreen dynamically as a child of HomeScene.
 '*              Called once on init() and kept in memory while user is searching.
 '* @sideeffect Creates m.searchScreen, attaches it to m.top, registers observers.
 '*
@@ -88,7 +88,7 @@ sub createSearchScreen()
 end sub
 
 '**
-'* @description Creates detailsScreen dynamically as a child of home_scene.
+'* @description Creates detailsScreen dynamically as a child of HomeScene.
 '*              Called on demand in onMovieSelected() when user selects a movie.
 '* @sideeffect Creates m.detailsScreen, attaches it to m.top, registers observer.
 '*

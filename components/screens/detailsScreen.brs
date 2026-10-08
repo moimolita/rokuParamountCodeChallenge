@@ -52,7 +52,7 @@ end sub
 '**
 '* @description Populates the screen with the selected movie, then fires the lazy
 '*              detail fetch for plot + rating.
-'* @param {roAssociativeArray} obj Field change event carrying the movie_item node.
+'* @param {roAssociativeArray} obj Field change event carrying the MovieItem node.
 '* @sideeffect Updates poster/title/year; blanks plot/rating; runs the detail task.
 '*
 sub onMovieChanged(obj)
@@ -133,7 +133,7 @@ end function
 
 '**
 '* @description Single source of truth for triggering playback (OK and play key).
-'* @sideeffect Writes m.top.playPressed — observed by home_scene to launch video.
+'* @sideeffect Writes m.top.playPressed — observed by HomeScene to launch video.
 '*
 sub triggerPlay()
     m.top.playPressed = true

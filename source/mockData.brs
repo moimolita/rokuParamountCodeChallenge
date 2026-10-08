@@ -1,10 +1,10 @@
 '**
-'* @description Returns a mock ContentNode tree of movie_item nodes for development
+'* @description Returns a mock ContentNode tree of MovieItem nodes for development
 '*              without a network dependency. Output format is IDENTICAL to what the
-'*              real OMDb search_task produces — a ContentNode whose children are
-'*              movie_item nodes.
+'*              real OMDb SearchTask produces — a ContentNode whose children are
+'*              MovieItem nodes.
 '* @param {String} query Optional search term to filter mock results by title. Empty string returns all mock movies.
-'* @returns {roSGNode} A ContentNode with movie_item children ready for the grid.
+'* @returns {roSGNode} A ContentNode with MovieItem children ready for the grid.
 '*
 function getMockMovies(query = "" as string) as object
     content = createObject("roSGNode", "ContentNode")

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    home_scene.xml — Scene (Root Orchestrator)
+    homeScene.xml — Scene (Root Orchestrator)
 -->
-<component name="home_scene" extends="Scene">
-    <script type="text/brightscript" uri="pkg:/components/home_scene.brs" />
+<component name="HomeScene" extends="Scene">
+    <script type="text/brightscript" uri="pkg:/components/homeScene.brs" />
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />
     <children>
-        <!-- Native Roku video player — shown when user presses Play in details_screen -->
+        <!-- Native Roku video player — shown when user presses Play in DetailsScreen -->
         <Video
-            id="video_player"
+            id="videoPlayer"
             visible="false"
             translation="[0,0]"
             width="1920"
@@ -16,7 +16,7 @@
 
         <!-- Global error dialog — shown via m.top.dialog for modal behavior -->
         <Dialog
-            id="error_dialog"
+            id="errorDialog"
             title=""
             visible="false" />
     </children>

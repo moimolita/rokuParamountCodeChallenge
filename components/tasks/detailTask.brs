@@ -19,7 +19,7 @@ end sub
 sub fetchDetail()
     ' Detail endpoint: i={imdbID}&plot=full returns Plot + imdbRating.
     transfer = createObject("roUrlTransfer")
-    id = transfer.escape(m.top.imdb_id)
+    id = transfer.escape(m.top.imdbId)
     url = Const().OMDB_BASE_URL + "?apikey=" + Const().OMDB_API_KEY + "&i=" + id + "&plot=full"
 
     ' Fetch with exponential backoff retry (3 attempts: 1s, 2s, 4s delay)
@@ -31,9 +31,9 @@ sub fetchDetail()
     if parsed = invalid then return
     if parsed["Response"] <> "True" then return
 
-    ' sanitize() turns OMDb's "N/A" into a friendly fallback.
-    m.top.plot   = sanitize(parsed["Plot"], "No plot available.")
-    m.top.rating = sanitize(parsed["imdbRating"], "N/A")
+    ' sanitizeField() turns OMDb's "N/A" into a friendly fallback.
+    m.top.plot   = sanitizeField(parsed["Plot"], "No plot available.")
+    m.top.rating = sanitizeField(parsed["imdbRating"], "N/A")
 end sub
 
 ' ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -44,7 +44,7 @@ end sub
 '* @param {String} fallback Value to return when the field is "N/A" or missing.
 '* @returns {String} The value, or the fallback.
 '*
-function sanitize(value as dynamic, fallback as string) as string
+function sanitizeField(value as dynamic, fallback as string) as string
     if value = invalid then return fallback
     if value = "N/A" then return fallback
     return value

@@ -12,7 +12,7 @@ end sub
 
 '**
 '* @description Runs on the task thread: fetches a page of OMDb search results,
-'*              parses them, and publishes totalResults + a movie_item tree (or an error).
+'*              parses them, and publishes totalResults + a MovieItem tree (or an error).
 '*              Uses exponential backoff retry strategy to handle transient network failures.
 '* @sideeffect Writes m.top.totalResults, m.top.results, and m.top.error.
 '*
@@ -58,10 +58,10 @@ end sub
 ' ─── Helpers ──────────────────────────────────────────────────────────────────
 
 '**
-'* @description Builds a ContentNode tree of movie_item nodes from a parsed OMDb
+'* @description Builds a ContentNode tree of MovieItem nodes from a parsed OMDb
 '*              response. Plot/rating are left empty (filled later by the detail fetch).
 '* @param {Object} parsed Parsed OMDb JSON, or invalid.
-'* @returns {roSGNode} ContentNode with movie_item children (empty on bad response).
+'* @returns {roSGNode} ContentNode with MovieItem children (empty on bad response).
 '*
 function buildMovieNodes(parsed as object) as object
     content = createObject("roSGNode", "ContentNode")
@@ -70,11 +70,11 @@ function buildMovieNodes(parsed as object) as object
     if parsed["Response"] <> "True" then return content
 
     for each result in parsed["Search"]
-        item = createObject("roSGNode", "movie_item")
+        item = createObject("roSGNode", "MovieItem")
         item.title      = result["Title"]
         item.year       = result["Year"]
-        item.imdb_id    = result["imdbID"]
-        item.poster_url = result["Poster"]
+        item.imdbId     = result["imdbID"]
+        item.posterUrl  = result["Poster"]
         item.plot       = ""      ' not in the search endpoint — filled by detail fetch
         item.rating     = "N/A"   ' not in the search endpoint — filled by detail fetch
         content.appendChild(item)

@@ -18,8 +18,8 @@ end function
 ' ─── Field Observer ───────────────────────────────────────────────────────────
 
 '**
-'* @description Fired when MarkupGrid assigns a movie_item. Binds poster/title/year.
-'* @param {roAssociativeArray} obj Field change event; obj.getData() is the movie_item.
+'* @description Fired when MarkupGrid assigns a MovieItem. Binds poster/title/year.
+'* @param {roAssociativeArray} obj Field change event; obj.getData() is the MovieItem.
 '* @sideeffect Updates m.poster.uri, m.title.text, m.year.text.
 '*
 sub onMovieChanged(obj)
@@ -31,7 +31,7 @@ sub onMovieChanged(obj)
 
     ' Grid cards are small — request a reduced-width poster to save bandwidth and
     ' texture memory across the many cards in a paginated grid.
-    m.poster.uri = posterUrl(movie.poster_url, Const().POSTER_GRID)
+    m.poster.uri = buildPosterUrl(movie.posterUrl, Const().POSTER_GRID)
     m.title.text = movie.title
     m.year.text  = movie.year
 end sub

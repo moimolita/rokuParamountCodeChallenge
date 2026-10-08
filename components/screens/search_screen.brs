@@ -60,11 +60,11 @@ end sub
 
 '**
 '* @description Creates the search task once and observes its results output.
-'* @sideeffect Stores m.search_task and registers its results observer.
+'* @sideeffect Stores m.searchTask and registers its results observer.
 '*
 sub createSearchTask()
-    m.search_task = createObject("roSGNode", "search_task")
-    m.search_task.observeField("results", "onResultsReady")
+    m.searchTask = createObject("roSGNode", "SearchTask")
+    m.searchTask.observeField("results", "onResultsReady")
 end sub
 
 ' ─── Grid Population ──────────────────────────────────────────────────────────
@@ -101,12 +101,12 @@ end sub
 
 '**
 '* @description Runs the search task with the current query + page (set inputs then run).
-'* @sideeffect Sets m.search_task.query/page and triggers control="RUN".
+'* @sideeffect Sets m.searchTask.query/page and triggers control="RUN".
 '*
 sub runSearch()
-    m.search_task.query = m.current_query
-    m.search_task.page  = m.current_page
-    m.search_task.control = "RUN"
+    m.searchTask.query = m.current_query
+    m.searchTask.page  = m.current_page
+    m.searchTask.control = "RUN"
 end sub
 
 '**
@@ -119,7 +119,7 @@ sub onResultsReady(obj)
     content = obj.getData()
 
     ' Error handling first — the task sets "error" alongside an empty results tree.
-    taskError = m.search_task.error
+    taskError = m.searchTask.error
     if taskError = "no_results"
         m.hint_label.text = "No movies found. Try another search."
         m.hint_label.visible = true
@@ -134,7 +134,7 @@ sub onResultsReady(obj)
     end if
 
     m.hint_label.visible = false
-    m.total_results = m.search_task.totalResults
+    m.total_results = m.searchTask.totalResults
 
     if m.is_loading_more = true
         ' LOAD MORE — append new children to the EXISTING tree so the grid keeps

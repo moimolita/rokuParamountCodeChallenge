@@ -14,7 +14,7 @@
 
     Contract: No UI node access. No setFocus. Communicates only via interface fields.
 -->
-<component name="search_task" extends="Task">
+<component name="SearchTask" extends="Task">
     <script type="text/brightscript" uri="pkg:/components/tasks/search_task.brs" />
     <!-- App constants (Const) — OMDb base URL, API key, HTTP timeout. -->
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />

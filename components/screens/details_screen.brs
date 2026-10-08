@@ -39,12 +39,12 @@ end sub
 
 '**
 '* @description Creates the lazy detail task and observes its plot/rating outputs.
-'* @sideeffect Stores m.detail_task and registers its plot/rating observers.
+'* @sideeffect Stores m.detailTask and registers its plot/rating observers.
 '*
 sub createDetailsTask()
-    m.detail_task = createObject("roSGNode", "detail_task") ' Lazy detail task (observed below)
-    m.detail_task.observeField("plot",   "onDetailPlotReady")
-    m.detail_task.observeField("rating", "onDetailRatingReady")
+    m.detailTask = createObject("roSGNode", "DetailTask") ' Lazy detail task (observed below)
+    m.detailTask.observeField("plot",   "onDetailPlotReady")
+    m.detailTask.observeField("rating", "onDetailRatingReady")
 end sub
 
 ' ─── Data Binding ─────────────────────────────────────────────────────────────
@@ -70,8 +70,8 @@ sub onMovieChanged(obj)
     m.detail_plot.text   = ""
 
     ' Fire the lazy detail fetch for this movie (set input then run).
-    m.detail_task.imdbId = movie.imdbId
-    m.detail_task.control = "RUN"
+    m.detailTask.imdbId = movie.imdbId
+    m.detailTask.control = "RUN"
 end sub
 
 ' ─── Detail Fetch Handlers ────────────────────────────────────────────────────

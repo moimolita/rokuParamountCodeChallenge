@@ -4,7 +4,7 @@
     Full movie details screen. Shows large poster, metadata (title, year, rating,
     plot) and a Play button. Reached when the user presses OK on a grid card.
 -->
-<component name="Details_screen" extends="Group">
+<component name="DetailsScreen" extends="Group">
     <script type="text/brightscript" uri="pkg:/components/screens/details_screen.brs" />
     <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
     <script type="text/brightscript" uri="pkg:/source/utils.brs" />
@@ -15,7 +15,7 @@
         <field id="movie" type="node" onChange="onMovieChanged" />
 
         <!-- Output — observed by home_scene to trigger video playback. -->
-        <field id="play_pressed" type="boolean" value="false" alwaysNotify="true" />
+        <field id="playPressed" type="boolean" value="false" alwaysNotify="true" />
     </interface>
 
     <children>
@@ -29,7 +29,7 @@
 
         <!-- ── Content frame ─────────────────────────────────────────── -->
         <Rectangle
-            id="content_frame"
+            id="contentFrame"
             width="1800"
             height="960"
             color="0x1A1A2ECC"
@@ -38,7 +38,7 @@
         <!-- ── Poster (large — ~5/7 of screen height, right side) ────── -->
 
         <Poster
-            id="detail_poster"
+            id="detailPoster"
             width="514"
             height="771"
             translation="[1300, 155]"
@@ -48,7 +48,7 @@
         <!-- ── Text column (left) ────────────────────────────────────── -->
         <!-- ── Title ─────────────────────────────────────────────────── -->
         <Label
-            id="detail_title"
+            id="detailTitle"
             width="1150"
             height="140"
             font="font:ExtraLargeBoldSystemFont"
@@ -59,7 +59,7 @@
 
         <!-- ── Year (basic data — set immediately) ───────────────────── -->
         <Label
-            id="detail_year"
+            id="detailYear"
             width="200"
             height="40"
             font="font:MediumSystemFont"
@@ -69,7 +69,7 @@
 
         <!-- ── Rating (filled by the lazy detail fetch — blank until then) ─ -->
         <Label
-            id="detail_rating"
+            id="detailRating"
             width="400"
             height="40"
             font="font:MediumSystemFont"
@@ -79,7 +79,7 @@
 
         <!-- ── Plot ──────────────────────────────────────────────────── -->
         <Label
-            id="detail_plot"
+            id="detailPlot"
             width="1150"
             height="340"
             font="font:MediumSystemFont"
@@ -92,7 +92,7 @@
         <!-- Empty icon URIs remove the default focus "dot"/bullet the native 
         Button shows to the left of the label. -->
         <Button
-            id="play_button"
+            id="playButton"
             text="Play"
             minWidth="160"
             maxWidth="160"

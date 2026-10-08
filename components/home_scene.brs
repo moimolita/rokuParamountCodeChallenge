@@ -93,14 +93,14 @@ end sub
 '* @sideeffect Creates m.details_screen, attaches it to m.top, registers observer.
 '*
 sub createDetailsScreen()
-    m.details_screen = createObject("roSGNode", "Details_screen")
+    m.details_screen = createObject("roSGNode", "DetailsScreen")
     m.details_screen.id = "details_screen"
     m.details_screen.visible = false
     m.details_screen.translation = [0, 0]
     m.top.appendChild(m.details_screen)
     
     ' Register observer for play button events
-    m.details_screen.observeField("play_pressed", "onPlayPressed")
+    m.details_screen.observeField("playPressed", "onPlayPressed")
 end sub
 
 '**

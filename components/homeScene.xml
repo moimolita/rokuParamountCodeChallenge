@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    home_scene.xml — Scene (Root Orchestrator)
+    homeScene.xml — Scene (Root Orchestrator)
 -->
 <component name="HomeScene" extends="Scene">
-    <script type="text/brightscript" uri="pkg:/components/home_scene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/homeScene.brs" />
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />
     <children>
         <!-- Native Roku video player — shown when user presses Play in DetailsScreen -->

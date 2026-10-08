@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    search_screen.xml — Screen
+    searchScreen.xml — Screen
     Main search screen. Shows a movie grid on the left and a detail pane on the right.
 -->
 <component name="SearchScreen" extends="Group">
-    <script type="text/brightscript" uri="pkg:/components/screens/search_screen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/screens/searchScreen.brs" />
     <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
     <script type="text/brightscript" uri="pkg:/source/utils.brs" />
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />

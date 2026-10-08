@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    search_task.xml — Task (Async Network)
+    searchTask.xml — Task (Async Network)
     Fetches movie search results from OMDb API in a background thread.
 
     Inputs  (set by UI thread before control="RUN"):
@@ -15,11 +15,11 @@
     Contract: No UI node access. No setFocus. Communicates only via interface fields.
 -->
 <component name="SearchTask" extends="Task">
-    <script type="text/brightscript" uri="pkg:/components/tasks/search_task.brs" />
+    <script type="text/brightscript" uri="pkg:/components/tasks/searchTask.brs" />
     <!-- App constants (Const) — OMDb base URL, API key, HTTP timeout. -->
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />
     <!-- Retry strategy with exponential backoff for network resilience -->
-    <script type="text/brightscript" uri="pkg:/source/retry_strategy.brs" />
+    <script type="text/brightscript" uri="pkg:/source/retryStrategy.brs" />
     <interface>
         <!-- Inputs -->
         <field id="query"        type="string"  value=""  />

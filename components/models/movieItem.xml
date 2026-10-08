@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    movie_item.xml — Data Model
+    movieItem.xml — Data Model
     Extends ContentNode to hold movie data from OMDb API.
 
     Fields populated by search endpoint (?s=):

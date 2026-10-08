@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    details_screen.xml — Screen
+    detailsScreen.xml — Screen
     Full movie details screen. Shows large poster, metadata (title, year, rating,
     plot) and a Play button. Reached when the user presses OK on a grid card.
 -->
 <component name="DetailsScreen" extends="Group">
-    <script type="text/brightscript" uri="pkg:/components/screens/details_screen.brs" />
+    <script type="text/brightscript" uri="pkg:/components/screens/detailsScreen.brs" />
     <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
     <script type="text/brightscript" uri="pkg:/source/utils.brs" />
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />

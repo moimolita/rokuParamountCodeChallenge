@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    movie_card.xml — Custom Component
+    movieCard.xml — Custom Component
 -->
 <component name="MovieCard" extends="Group">
-    <script type="text/brightscript" uri="pkg:/components/components/movie_card.brs" />
+    <script type="text/brightscript" uri="pkg:/components/components/movieCard.brs" />
     <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
     <script type="text/brightscript" uri="pkg:/source/utils.brs" />
     <script type="text/brightscript" uri="pkg:/source/constants.brs" />

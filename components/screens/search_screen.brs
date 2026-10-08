@@ -166,7 +166,7 @@ sub onItemFocused(obj)
     if movie = invalid then return
 
     ' Medium poster for the pane: larger than grid cards, smaller than details.
-    m.detail_poster.uri = posterUrl(movie.poster_url, Const().POSTER_PANE)
+    m.detail_poster.uri = buildPosterUrl(movie.poster_url, Const().POSTER_PANE)
     m.detail_title.text = movie.title
     m.detail_year.text  = movie.year
     m.detail_plot.text  = movie.plot

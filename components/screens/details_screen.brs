@@ -61,7 +61,7 @@ sub onMovieChanged(obj)
     if m.detail_title = invalid then return
 
     ' Basic data from the search result — shown immediately. Large poster.
-    m.detail_poster.uri = posterUrl(movie.poster_url, Const().POSTER_DETAIL)
+    m.detail_poster.uri = buildPosterUrl(movie.poster_url, Const().POSTER_DETAIL)
     m.detail_title.text = movie.title
     m.detail_year.text  = movie.year
 

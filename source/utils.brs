@@ -13,7 +13,7 @@
 '* @param {Integer} width Desired image width in pixels (e.g. 200 grid, 500 details).
 '* @returns {String} The rebuilt URL, or "" if unusable, or the original as fallback.
 '*
-function posterUrl(originalUrl as string, width as integer) as string
+function buildPosterUrl(originalUrl as string, width as integer) as string
     if originalUrl = "" or originalUrl = "N/A" then return ""
 
     marker = "._V1_"

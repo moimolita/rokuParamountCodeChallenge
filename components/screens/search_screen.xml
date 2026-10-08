@@ -13,8 +13,7 @@
         <!-- Output — observed by home_scene to navigate to details_screen. -->
         <field id="movie_selected" type="node" alwaysNotify="true" />
 
-        <!-- Output — a hard error message (e.g. network failure) for home_scene to
-             show in the global modal error_dialog. -->
+        <!-- Output — a hard error message (e.g. network failure). -->
         <field id="error_message" type="string" value="" alwaysNotify="true" />
     </interface>
 
@@ -36,10 +35,8 @@
             translation="[65, 60]" />
 
         <!-- ── Hint / status message ────────────────────────────────── -->
-        <!--
-            Shown when the query is shorter than the OMDb minimum (3 chars).
-            Hidden during a real search.
-        -->
+        <!-- Shown when the query is shorter than the OMDb minimum (3 chars).
+            Hidden during a real search.-->
         <Label
             id="hint_label"
             text=""
@@ -53,10 +50,8 @@
             visible="false" />
 
         <!-- ── Movie Grid ────────────────────────────────────────────── -->
-        <!--
-            MarkupGrid uses movie_card as item renderer (itemComponentName).
-            Each cell is an instance of movie_card.
-        -->
+        <!-- MarkupGrid uses MovieCard as item renderer (itemComponentName).
+            Each cell is an instance of MovieCard.-->
         <MarkupGrid
             id="movie_grid"
             translation="[650, 130]"
@@ -64,13 +59,11 @@
             itemSpacing="[20, 20]"
             numColumns="3"
             numRows="2"
-            itemComponentName="movie_card"
+            itemComponentName="MovieCard"
             visible="true" />
 
         <!-- ── Detail Pane ───────────────────────────────────────────── -->
-        <!--
-            Overlay panel on the right side. Background is always visible.
-        -->
+        <!-- Overlay panel on the right side. Background is always visible. -->
         <Rectangle
             id="detail_pane"
             width="480"
@@ -80,7 +73,7 @@
             visible="true" />
 
         <!-- Medium poster (posterUrl 300). Declared FIRST so it renders behind the
-             title band and title (SceneGraph: later children draw on top). -->
+            title band and title (SceneGraph: later children draw on top). -->
         <Poster
             id="detail_poster"
             width="440"
@@ -91,7 +84,7 @@
             visible="false" />
 
         <!-- Semi-transparent band over the poster's lower third — guarantees the
-             title is legible regardless of the image behind it. -->
+            title is legible regardless of the image behind it. -->
         <Rectangle
             id="detail_title_bg"
             width="440"
@@ -101,7 +94,7 @@
             visible="false" />
 
         <!-- Title — declared LAST of the overlapping trio, so it draws on top of
-             both the poster and the band. -->
+            both the poster and the band. -->
         <Label
             id="detail_title"
             width="410"

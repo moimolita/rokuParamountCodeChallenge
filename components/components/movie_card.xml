@@ -2,7 +2,7 @@
 <!--
     movie_card.xml — Custom Component
 -->
-<component name="movie_card" extends="Group">
+<component name="MovieCard" extends="Group">
     <script type="text/brightscript" uri="pkg:/components/components/movie_card.brs" />
     <!-- Global helpers: poster-size (posterUrl) and app constants (Const). -->
     <script type="text/brightscript" uri="pkg:/source/utils.brs" />
@@ -19,7 +19,7 @@
     <children>
         <!-- Poster background ─────────────────────────────────────────── -->
         <Rectangle
-            id="poster_bg"
+            id="posterBg"
             width="220"
             height="260"
             color="0x1A1A2ECC"
